@@ -1,15 +1,16 @@
 # Basel: a Home Assistant theme in the International Typographic Style, with light and dark mode in one theme.
 #
 # Near-white paper, one signal red and black. A neo-grotesque system sans set tight and flush left, square corners,
-# no shadows; cards are separated by the grid gap and a thin black rule along their top edge. The primary colour,
-# switched-on states, heating and the selected entry are red; calm states are black; off is grey.
+# no shadows; cards are separated by the grid gap and a thin black rule along their top edge. Switched-on states,
+# heating, alarms, errors and the selected entry are red; buttons, links and calm states are black; off is grey.
 # Dark mode is white and red on deep black-grey, derived separately rather than inverted.
 #
 # Works without any add-on: colours, rules, corners, font stack, bold tile names and bold headings come from
 # plain theme variables. With card-mod 4.x installed (optional), the card-mod-* keys below turn tiles of
 # switched-on devices into solid red tiles with white text, set big numbers (entity, sensor,
-# weather) large and bold, put a heavier black rule and capitals on heading cards, enlarge the dashboard
-# title and mark the selected sidebar entry as a red bar. Without card-mod those keys are ignored.
+# weather) large and bold, put a heavier black rule, capitals and a running number on heading cards, set the
+# thermostat title flush left, draw a 2 px focus ring around tiles, enlarge the dashboard title and mark the
+# selected sidebar entry as a red bar. Without card-mod those keys are ignored.
 #
 # Fonts: system fonts only, nothing is downloaded. Helvetica Neue on Apple devices, Arial on Windows,
 # Nimbus Sans or Liberation Sans on Linux, the system sans (Roboto) on Android.
@@ -21,32 +22,32 @@ Basel:
   basel-on-red: "#ffffff"
   basel-ink: "#111111"
   basel-rule: "#111111"
-  basel-sans: "'Helvetica Neue', Helvetica, Arial, 'Nimbus Sans', 'Liberation Sans', system-ui, sans-serif"
+  basel-sans: "'Helvetica Neue', Helvetica, Arial, 'Nimbus Sans', Arimo, 'Liberation Sans', system-ui, sans-serif"
 
-  # Core colours: red for actions and selection
-  primary-color: "#da0b16"
+  # Core colours: actions in ink, red only for states, selection and alerts
+  primary-color: "#111111"
   accent-color: "#da0b16"
   text-primary-color: "#ffffff"
   primary-text-color: "#111111"
   secondary-text-color: "#555555"
   disabled-text-color: "#8c8c8c"
   disabled-color: "#8c8c8c"
-  dark-primary-color: "#b0080f"
-  light-primary-color: "#f7b3b5"
+  dark-primary-color: "#000000"
+  light-primary-color: "#e3e3e3"
   # Newer frontends build buttons, chips, switches, alerts and borders from these scales.
-  # Primary and red are the one signal red; orange (warning) and green (success) are black and grey,
-  # so no third hue appears. The neutral scale stays the frontend default.
-  ha-color-primary-05: "#1f0203"
-  ha-color-primary-10: "#3a0306"
-  ha-color-primary-20: "#5e050b"
-  ha-color-primary-30: "#b0080f"
-  ha-color-primary-40: "#da0b16"
-  ha-color-primary-50: "#c00a14"
-  ha-color-primary-60: "#e8434a"
-  ha-color-primary-70: "#f07a7f"
-  ha-color-primary-80: "#f7b3b5"
-  ha-color-primary-90: "#fdeeee"
-  ha-color-primary-95: "#fef6f6"
+  # Primary is ink (buttons, links, tabs), red is the one signal red (errors, alarms). Orange (warning) sets
+  # black on pale red, green (success) black and grey, so no third hue appears. The neutral scale stays default.
+  ha-color-primary-05: "#0a0a0a"
+  ha-color-primary-10: "#141414"
+  ha-color-primary-20: "#1f1f1f"
+  ha-color-primary-30: "#333333"
+  ha-color-primary-40: "#111111"
+  ha-color-primary-50: "#3d3d3d"
+  ha-color-primary-60: "#5c5c5c"
+  ha-color-primary-70: "#8c8c8c"
+  ha-color-primary-80: "#bdbdbd"
+  ha-color-primary-90: "#e3e3e3"
+  ha-color-primary-95: "#f0f0f0"
   ha-color-red-05: "#1f0203"
   ha-color-red-10: "#3a0306"
   ha-color-red-20: "#5e050b"
@@ -66,9 +67,9 @@ Basel:
   ha-color-orange-50: "#3d3d3d"
   ha-color-orange-60: "#5c5c5c"
   ha-color-orange-70: "#8c8c8c"
-  ha-color-orange-80: "#bdbdbd"
-  ha-color-orange-90: "#e3e3e3"
-  ha-color-orange-95: "#f0f0f0"
+  ha-color-orange-80: "#f7b3b5"
+  ha-color-orange-90: "#fdeeee"
+  ha-color-orange-95: "#fef6f6"
   ha-color-green-05: "#0a0a0a"
   ha-color-green-10: "#141414"
   ha-color-green-20: "#1f1f1f"
@@ -80,7 +81,7 @@ Basel:
   ha-color-green-80: "#bdbdbd"
   ha-color-green-90: "#e3e3e3"
   ha-color-green-95: "#f0f0f0"
-  ha-color-focus: "#da0b16"
+  ha-color-focus: "#111111"
 
   # Paper
   primary-background-color: "#f1f1f1"
@@ -167,7 +168,7 @@ Basel:
   switch-checked-button-color: "#ffffff"
   switch-checked-track-color: "#da0b16"
   switch-unchecked-button-color: "#111111"
-  switch-unchecked-track-color: "#bdbdbd"
+  switch-unchecked-track-color: "#8c8c8c"
   ha-switch-checked-background-color: "#da0b16"
   ha-switch-checked-border-color: "#da0b16"
   ha-switch-checked-thumb-background-color: "#ffffff"
@@ -206,7 +207,7 @@ Basel:
   state-unavailable-color: "#bdbdbd"
   state-icon-error-color: "#da0b16"
   success-color: "#111111"
-  warning-color: "#da0b16"
+  warning-color: "#111111"
   error-color: "#da0b16"
   info-color: "#111111"
   red-color: "#da0b16"
@@ -265,16 +266,21 @@ Basel:
       --secondary-text-color: var(--basel-on-red);
       --control-slider-background: var(--basel-on-red);
     }
+    ha-card:has(ha-tile-container[focused]) { box-shadow: var(--ha-card-box-shadow), 0 0 0 2px var(--ha-color-focus) !important; }
     :host(hui-entity-card) .value, :host(hui-sensor-card) .value { font-size: 56px; font-weight: 700; letter-spacing: -0.03em; line-height: 1; }
     :host(hui-weather-forecast-card) .temp-attribute .temp { font-size: 44px; font-weight: 700; letter-spacing: -0.03em; line-height: 1; }
     :host(hui-heading-card) ha-card { box-shadow: inset 0 4px 0 var(--basel-rule); padding-top: 12px; }
     :host(hui-heading-card) .title .heading { text-transform: uppercase; letter-spacing: 0.06em; font-size: 13px; }
+    :host(hui-heading-card) { counter-increment: basel-section; }
+    :host(hui-heading-card) .title .heading::before { content: counter(basel-section, decimal-leading-zero); display: inline-block; min-width: 3em; letter-spacing: 0; }
+    :host(hui-thermostat-card) .title { text-align: start; }
   # Optional, card-mod 4.x: badges of coloured lights in red instead of the light colour
   card-mod-badge: |
     ha-badge[style*="--badge-color:#"], ha-badge[style*="--badge-color:rgb"] { --badge-color: var(--state-light-active-color) !important; }
   # Optional, card-mod 4.x: the dashboard title large and bold
   card-mod-root: |
     .main-title { font-size: 32px; font-weight: 700; letter-spacing: -0.02em; }
+    #view { counter-reset: basel-section; }
   # Optional, card-mod 4.x: sidebar in the theme font, selected entry as a solid red bar
   card-mod-sidebar: |
     :host { font-family: var(--basel-sans); }
@@ -293,19 +299,19 @@ Basel:
       basel-ink: "#f2f2f2"
       basel-rule: "#f2f2f2"
       # The frontend reads other steps of the scales in dark mode (text and links from 60/70, loud fills
-      # from 40/50, quiet fills from 05/10). These scales follow those roles: loud fills stay signal red
-      # under white text, text steps are a lighter red that reads on black-grey.
-      ha-color-primary-05: "#1f0a0a"
-      ha-color-primary-10: "#2d0f10"
-      ha-color-primary-20: "#451315"
-      ha-color-primary-30: "#a8070f"
-      ha-color-primary-40: "#c20914"
-      ha-color-primary-50: "#da0b16"
-      ha-color-primary-60: "#ff6b63"
-      ha-color-primary-70: "#ff8f89"
-      ha-color-primary-80: "#ffb3ae"
-      ha-color-primary-90: "#ffd6d3"
-      ha-color-primary-95: "#ffecea"
+      # from 40/50, quiet fills from 05/10). These scales follow those roles: red loud fills stay signal red
+      # under white text, red text steps are a lighter red; ink loud fills are light with dark text.
+      ha-color-primary-05: "#1c1c1c"
+      ha-color-primary-10: "#2c2c2c"
+      ha-color-primary-20: "#3d3d3d"
+      ha-color-primary-30: "#cccccc"
+      ha-color-primary-40: "#e0e0e0"
+      ha-color-primary-50: "#f2f2f2"
+      ha-color-primary-60: "#f2f2f2"
+      ha-color-primary-70: "#bfbfbf"
+      ha-color-primary-80: "#8c8c8c"
+      ha-color-primary-90: "#bfbfbf"
+      ha-color-primary-95: "#e0e0e0"
       ha-color-red-05: "#1f0a0a"
       ha-color-red-10: "#2d0f10"
       ha-color-red-20: "#451315"
@@ -317,9 +323,9 @@ Basel:
       ha-color-red-80: "#ffb3ae"
       ha-color-red-90: "#ffd6d3"
       ha-color-red-95: "#ffecea"
-      ha-color-orange-05: "#181818"
-      ha-color-orange-10: "#222222"
-      ha-color-orange-20: "#2c2c2c"
+      ha-color-orange-05: "#1f0a0a"
+      ha-color-orange-10: "#2d0f10"
+      ha-color-orange-20: "#451315"
       ha-color-orange-30: "#333333"
       ha-color-orange-40: "#3d3d3d"
       ha-color-orange-50: "#474747"
@@ -339,16 +345,17 @@ Basel:
       ha-color-green-80: "#8c8c8c"
       ha-color-green-90: "#bfbfbf"
       ha-color-green-95: "#e0e0e0"
-      ha-color-focus: "#ff6b63"
-      primary-color: "#ff4f47"
-      accent-color: "#ff4f47"
+      ha-color-focus: "#f2f2f2"
+      ha-color-on-primary-loud: "#111111"
+      primary-color: "#f2f2f2"
+      accent-color: "#ff6b63"
       text-primary-color: "#111111"
       primary-text-color: "#f2f2f2"
       secondary-text-color: "#a6a6a6"
       disabled-text-color: "#7a7a7a"
       disabled-color: "#7a7a7a"
-      dark-primary-color: "#ff8f89"
-      light-primary-color: "#451315"
+      dark-primary-color: "#ffffff"
+      light-primary-color: "#3d3d3d"
       text-light-primary-color: "#f2f2f2"
       primary-background-color: "#141414"
       secondary-background-color: "#0e0e0e"
@@ -390,32 +397,32 @@ Basel:
       markdown-code-background-color: "#0e0e0e"
       switch-checked-button-color: "#ffffff"
       switch-checked-track-color: "#da0b16"
-      switch-unchecked-button-color: "#a6a6a6"
-      switch-unchecked-track-color: "#474747"
+      switch-unchecked-button-color: "#f2f2f2"
+      switch-unchecked-track-color: "#7a7a7a"
       ha-switch-checked-background-color: "#da0b16"
       ha-switch-checked-border-color: "#da0b16"
       scrollbar-thumb-color: "#474747"
-      control-slider-color: "#ff4f47"
+      control-slider-color: "#ff6b63"
       control-slider-background: "#2e2e2e"
-      control-circular-slider-color: "#ff4f47"
+      control-circular-slider-color: "#ff6b63"
       control-circular-slider-background: "#f2f2f2"
       control-switch-on-color: "#da0b16"
       control-switch-off-color: "#474747"
       state-icon-color: "#f2f2f2"
-      state-active-color: "#ff4f47"
+      state-active-color: "#ff6b63"
       state-inactive-color: "#8c8c8c"
       state-unavailable-color: "#474747"
-      state-icon-error-color: "#ff4f47"
+      state-icon-error-color: "#ff6b63"
       success-color: "#f2f2f2"
-      warning-color: "#ff4f47"
-      error-color: "#ff4f47"
+      warning-color: "#f2f2f2"
+      error-color: "#ff6b63"
       info-color: "#f2f2f2"
-      red-color: "#ff4f47"
-      pink-color: "#ff4f47"
-      deep-orange-color: "#ff4f47"
-      orange-color: "#ff4f47"
-      amber-color: "#ff4f47"
-      yellow-color: "#ff4f47"
+      red-color: "#ff6b63"
+      pink-color: "#ff6b63"
+      deep-orange-color: "#ff6b63"
+      orange-color: "#ff6b63"
+      amber-color: "#ff6b63"
+      yellow-color: "#ff6b63"
       purple-color: "#f2f2f2"
       deep-purple-color: "#f2f2f2"
       indigo-color: "#f2f2f2"
@@ -433,12 +440,12 @@ Basel:
       blue-grey-color: "#8c8c8c"
       light-grey-color: "#474747"
       white-color: "#f2f2f2"
-      graph-color-1: "#ff4f47"
+      graph-color-1: "#ff6b63"
       graph-color-2: "#f2f2f2"
       graph-color-3: "#8c8c8c"
       graph-color-4: "#bfbfbf"
       graph-color-5: "#5c5c5c"
-      energy-solar-color: "#ff4f47"
+      energy-solar-color: "#ff6b63"
       energy-grid-consumption-color: "#f2f2f2"
       energy-grid-return-color: "#8c8c8c"
       energy-battery-in-color: "#bfbfbf"

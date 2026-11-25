@@ -14,18 +14,22 @@ A Home Assistant theme in the International Typographic Style, the Swiss poster 
 
 ## What you get
 
-- **One red, black and paper.** Red is the primary colour and the colour of everything that is on, heating, lit, open or triggered, and of the selection. Calm states (cooling, locked, docked) are black, off is grey. The warning and success scales of the frontend are black and grey too, so no third hue turns up in buttons, alerts or chips.
+- **One red, black and paper.** Red marks what needs your eye: everything that is on, heating, lit, open or triggered, errors and alarms, and the selection. Buttons, links and tabs are black, calm states (cooling, locked, docked) are black, off is grey. Warnings are black on pale red, errors red on pale red, success and info black on grey, so no third hue turns up in buttons, alerts or chips.
 - **Rules instead of frames.** No borders, no shadows, no rounded corners. Every card starts with a thin black rule, and the grid gap is a little wider so the columns read like a poster.
 - **A neo-grotesque from the system:** Helvetica Neue on Apple devices, Arial on Windows, Nimbus Sans or Liberation Sans on Linux, the system sans on Android. Tile names and headings are bold and set tight. Nothing is downloaded.
-- **Readable red.** White on red is 5.2:1, red text on the page 4.6:1 (WCAG AA). Every text and control colour pair of both modes was measured.
+- **Readable red.** White on red is 5.2:1, red text on the page 4.6:1 (WCAG AA). All text pairs and the colours of switches, fields, sliders and the keyboard focus were measured in both modes. A focused tile gets a 2 px ring in black (white in dark mode), also around solid red tiles.
 - **Dark mode is its own design:** white and red on a deep black-grey with white rules. Red tiles keep white text; red text and icons use a lighter red that reads on dark grey. It is not an inverted light mode.
-- **Optional extras with card-mod:** switched-on lights, switches, fans, media players, climate, covers and similar entities become solid red tiles, big numbers of entity, sensor and weather cards become large and bold, heading cards get a heavier rule and capitals, the dashboard title grows, coloured lights turn red in badges, and the selected sidebar entry becomes a red bar.
+- **Optional extras with card-mod:** switched-on lights, switches, fans, media players, climate, covers and similar entities become solid red tiles, big numbers of entity, sensor and weather cards become large and bold, heading cards get a heavier rule, capitals and a running number (01, 02, 03 …) like on a poster, the thermostat title moves to the left, the dashboard title grows, coloured lights turn red in badges, and the selected sidebar entry becomes a red bar.
 
 Without card-mod the theme still works: paper, rules, red, black and the font stay, switched-on devices show a red icon instead of a solid tile, and headings are bold without capitals.
 
-![Without card-mod: rules and red icons, no solid tiles](https://raw.githubusercontent.com/wsclx/basel-theme/main/images/dashboard-light-desktop-no-cardmod.png)
+| Without card-mod, light | Without card-mod, dark |
+|---|---|
+| ![Without card-mod in light mode: rules and red icons, no solid tiles](https://raw.githubusercontent.com/wsclx/basel-theme/main/images/dashboard-light-desktop-no-cardmod.png) | ![Without card-mod in dark mode](https://raw.githubusercontent.com/wsclx/basel-theme/main/images/dashboard-dark-desktop-no-cardmod.png) |
 
 ![Entity list in dark mode](https://raw.githubusercontent.com/wsclx/basel-theme/main/images/entities-dark-desktop.png)
+
+![Dialog of a coloured light on a phone: the light keeps its own colour](https://raw.githubusercontent.com/wsclx/basel-theme/main/images/moreinfo-light-phone.png)
 
 ## Requirements
 
@@ -117,7 +121,9 @@ Change the variables below in a copy of the theme, or override them with card-mo
 | `basel-rule` | Colour of the rule along the top of every card |
 | `ha-card-box-shadow` | The rule itself (`inset 0 2px 0 …`); set `none` for cards without a rule |
 | `basel-sans` | The font stack |
-| `primary-color`, `ha-color-primary-*`, `ha-color-red-*` | The red of buttons, switches, links and alerts |
+| `primary-color`, `ha-color-primary-*` | Ink of buttons, links and tabs |
+| `ha-color-red-*`, `ha-color-orange-*` | Red of errors and alarms; pale red behind warnings |
+| `switch-checked-track-color`, `control-slider-color` | Red of switches and sliders that are on |
 | `lovelace-background`, `card-background-color` | Paper behind the cards and of the cards |
 | `state-active-color`, `state-inactive-color` | Colour of on and off icons |
 | `red-color`, `amber-color`, `blue-color`, `green-color` … | The palette behind all state colours: warm colours red, cool colours black |
@@ -128,9 +134,10 @@ Change the variables below in a copy of the theme, or override them with card-mo
 - Home Assistant does not guarantee theme variables between releases. If something looks off after an update, please open an issue with your version.
 - **Coloured lights:** a light that reports a colour shows that colour in its tile icon, its brightness slider and its badge. The frontend sets it per light, so a theme cannot change it. With card-mod the tile turns red and the badge red; in the light's dialog the colour picker keeps its colours.
 - Without card-mod a theme cannot fill a whole tile by its state, only the icon. The solid red tile needs card-mod, and so do the capitals and the heavier rule on heading cards.
-- Section numbers like "01" in front of headings are content: write them into the heading if you want them.
 - Badges stay centred above the sections; their alignment is fixed in the frontend.
+- The running numbers count every heading card of a view in order. A view with two headings in one section gets two numbers.
 - Switches keep their round shape, and round icons stay round: both are fixed in the frontend.
+- The thermostat draws its heating range in a lighter red, its track in a light grey and keeps its number and buttons centred; all of this is fixed in the frontend.
 - The sidebar keeps the frontend font (Roboto) without card-mod; card-mod switches it to the theme font.
 - Weather icons are the frontend's filled icons; the theme sets them to black and grey.
 - Camera images, maps, media artwork and entity pictures keep their own colours, and so do the round icons of the settings menu and the logos of integrations.
